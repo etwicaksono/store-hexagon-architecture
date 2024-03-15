@@ -41,3 +41,5 @@ fiber:
   #
   # Optional. Default: false
   enableStackTrace: true
+otel:
+  grpcHost: "18.141.146.167:4317"
