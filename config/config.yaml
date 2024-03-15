@@ -1,0 +1,43 @@
+---
+# options: development, staging, production.
+#
+# Default: development
+environment: development
+app:
+  name: Store-Hexagon-Architecture
+  version: 1.0.0
+  host: localhost
+  port: 3000
+  env: development
+  url: http://localhost:3000
+  logLevel: trace
+fiber:
+  # The maximum amount of time (second) to wait for the next request when keep-alive is enabled. If IdleTimeout is zero, the value of ReadTimeout is used.
+  #
+  #Default: unlimited
+  idleTimeout: 30
+
+  # The maximum duration (second) before timing out writes of the response. It is reset after the request handler has returned.
+  #
+  # Default: unlimited
+  writeTimeout: 30
+
+  # The amount of time allowed to read the full request including body. It is reset after the request handler has returned. The connection's read deadline is reset when the connection opens.
+  #
+  # Default: unlimited
+  readTimeout: 30
+
+  # When set to true, this will spawn multiple Go processes listening on the same port.
+  #
+  # Default: false
+  prefork: false
+
+  # When set to true, it will prevent app to panic
+  #
+  #Default: false
+  recovery: true
+
+  # EnableStackTrace enables handling stack trace
+  #
+  # Optional. Default: false
+  enableStackTrace: true
