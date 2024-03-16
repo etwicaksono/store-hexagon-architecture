@@ -17,7 +17,7 @@ type Logger struct {
 	version    string
 }
 
-const basePath = "logs"
+const basePath = "logs/log"
 
 func initialize(service string, version string, pathFile string, levelStr string) *Logger {
 	var level logrus.Level
