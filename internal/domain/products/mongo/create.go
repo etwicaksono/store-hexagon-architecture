@@ -28,6 +28,6 @@ func (mg *Mongo) Create(ctx context.Context, product products.Product) (data *pr
 	endTime := time.Now()
 	executionTime := endTime.Sub(startTime)
 
-	mg.log.Info(fmt.Sprintf(" Execution Time (Insert New Product): %s\n", executionTime))
+	mg.log.Info(fmt.Sprintf(" Execution Time (db:product:create): %s\n", executionTime))
 	return prd.toEntity(), http.StatusOK, nil
 }
