@@ -31,7 +31,7 @@ func New(
 	}
 }
 
-func (db *Mongo) fromEntity(p products.Product) Product {
+func (mg *Mongo) fromEntity(p products.Product) Product {
 	return Product{
 		Name:  p.Name,
 		Stock: p.Stock,
