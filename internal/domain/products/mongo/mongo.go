@@ -9,8 +9,8 @@ import (
 	"go.mongodb.org/mongo-driver/mongo"
 )
 
-// DB is contains functions for products db.
-type DB struct {
+// Mongo is contains functions for products db.
+type Mongo struct {
 	db       *mongo.Database
 	products string
 	otel     *infrastructure.Otel
@@ -22,8 +22,8 @@ func New(
 	db *mongo.Database,
 	products string,
 	otel *infrastructure.Otel,
-	log *logger.Logger) *DB {
-	return &DB{
+	log *logger.Logger) *Mongo {
+	return &Mongo{
 		db:       db,
 		products: products,
 		otel:     otel,
@@ -31,7 +31,7 @@ func New(
 	}
 }
 
-func (db *DB) fromEntity(p products.Product) Product {
+func (db *Mongo) fromEntity(p products.Product) Product {
 	return Product{
 		Name:  p.Name,
 		Stock: p.Stock,

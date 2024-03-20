@@ -6,9 +6,9 @@ import (
 )
 
 type Repository interface {
-	GetProductByID(ctx context.Context, id string) (*Product, int, error)
-	GetCompanies(ctx context.Context, data model.GetProductRequest) ([]*Product, *model.Pagination, int, error)
-	CreateProduct(ctx context.Context, product Product) (*Product, int, error)
-	UpdateProduct(ctx context.Context, id string, updateData model.UpdateProductRequest) (*Product, int, error)
-	DeleteProduct(ctx context.Context, id string) (int, error)
+	Find(ctx context.Context, objectID string) (data *Product, statusCode int, err error)
+	List(ctx context.Context, req model.GetProductRequest) (data []*Product, pgn *model.Pagination, statusCode int, err error)
+	Create(ctx context.Context, product Product) (data *Product, statusCode int, err error)
+	Update(ctx context.Context, id string, updateData model.UpdateProductRequest) (data *Product, statusCode int, err error)
+	Delete(ctx context.Context, id string) (statusCode int, err error)
 }
