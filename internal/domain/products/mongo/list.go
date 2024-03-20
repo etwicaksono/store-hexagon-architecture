@@ -24,7 +24,7 @@ func (mg *Mongo) List(ctx context.Context, req model.GetProductRequest) (data []
 	filter := make(map[string]interface{})
 
 	if trimmedName := strings.TrimSpace(req.Name); trimmedName != "" {
-		filter["name_product"] = bson.M{"$regex": primitive.Regex{Pattern: trimmedName, Options: "i"}}
+		filter["name"] = bson.M{"$regex": primitive.Regex{Pattern: trimmedName, Options: "i"}}
 	}
 
 	limit := int64(req.Limit)
