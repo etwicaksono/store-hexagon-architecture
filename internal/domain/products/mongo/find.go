@@ -21,7 +21,7 @@ func (mg *Mongo) Find(ctx context.Context, objectID string) (data *products.Prod
 
 	id, _ := primitive.ObjectIDFromHex(objectID)
 	filter := bson.M{
-		"id":         id,
+		"_id":        id,
 		"deleted_at": bson.M{"$exists": false},
 	}
 

@@ -26,7 +26,7 @@ func (mg *Mongo) Update(ctx context.Context, objectID string, updateData model.U
 	}
 
 	filter := bson.M{
-		"id": id,
+		"_id": id,
 	}
 
 	update := bson.M{}

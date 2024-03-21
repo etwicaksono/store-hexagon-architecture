@@ -62,7 +62,7 @@ func (mg *Mongo) List(ctx context.Context, req model.GetProductListRequest) (dat
 	endTime := time.Now()
 	executionTime := endTime.Sub(startTime)
 
-	mg.log.Info(fmt.Sprintf(" Execution Time (db:product:find): %s\n", executionTime))
+	mg.log.Info(fmt.Sprintf("Execution Time (db:product:find): %s\n", executionTime))
 
 	return toEntities(products), &model.Pagination{
 		Total:       int(total),

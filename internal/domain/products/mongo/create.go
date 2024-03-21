@@ -20,6 +20,7 @@ func (mg *Mongo) Create(ctx context.Context, product products.ProductEntity) (da
 	prd := mg.fromEntity(product)
 	res, err := mg.db.Collection(mg.products).InsertOne(ctx, prd)
 	if err != nil {
+		mg.log.Error(err.Error())
 		return nil, http.StatusInternalServerError, errorutil.ErrInternalDB
 	}
 
@@ -28,6 +29,6 @@ func (mg *Mongo) Create(ctx context.Context, product products.ProductEntity) (da
 	endTime := time.Now()
 	executionTime := endTime.Sub(startTime)
 
-	mg.log.Info(fmt.Sprintf(" Execution Time (db:product:create): %s\n", executionTime))
+	mg.log.Info(fmt.Sprintf("Execution Time (db:product:create): %s\n", executionTime))
 	return prd.toEntity(), http.StatusOK, nil
 }

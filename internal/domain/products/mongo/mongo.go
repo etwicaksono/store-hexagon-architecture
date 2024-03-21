@@ -40,7 +40,7 @@ func (mg *Mongo) fromEntity(p products.ProductEntity) ProductMongo {
 
 // Product is model database for product
 type ProductMongo struct {
-	ID    primitive.ObjectID `bson:"id,omitempty"`
+	ID    primitive.ObjectID `bson:"_id,omitempty"`
 	Name  string             `bson:"name"`
 	Stock int                `bson:"stock"`
 }

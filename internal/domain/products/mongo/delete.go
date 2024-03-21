@@ -23,7 +23,7 @@ func (mg *Mongo) Delete(ctx context.Context, objectID string) (statusCode int, e
 		return http.StatusBadRequest, errorutil.ErrNotFoundProduct
 	}
 
-	filter := bson.M{"id": id}
+	filter := bson.M{"_id": id}
 
 	// Ganti UpdateOne dengan DeleteOne
 	result, err := mg.db.Collection(mg.products).DeleteOne(ctx, filter)

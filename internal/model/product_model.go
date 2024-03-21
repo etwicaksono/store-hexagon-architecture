@@ -6,7 +6,7 @@ type Product struct {
 	Stock int    `json:"stock"`
 }
 
-type GetProductsRequest struct {
+type GetProductListRequest struct {
 	Page  int
 	Limit int
 	Name  string

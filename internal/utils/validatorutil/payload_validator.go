@@ -10,7 +10,7 @@ import (
 	"github.com/gofiber/fiber/v2"
 )
 
-func generateErrorMessage(err error) (errValidation fiber.Map) {
+func GenerateErrorMessage(err error) (errValidation fiber.Map) {
 	// make error map
 	errValidation = make(fiber.Map)
 	validationErrors := err.(validator.ValidationErrors)
@@ -87,7 +87,7 @@ func ValidateBodyPayload(ctx *fiber.Ctx, vld *validator.Validate, payload interf
 
 	err := vld.Struct(payload)
 	if err != nil {
-		errValidation := generateErrorMessage(err)
+		errValidation := GenerateErrorMessage(err)
 		return errValidation, nil
 	}
 
@@ -102,7 +102,7 @@ func ValidateQueryPayload(ctx *fiber.Ctx, vld *validator.Validate, payload inter
 
 	err := vld.Struct(payload)
 	if err != nil {
-		errValidation := generateErrorMessage(err)
+		errValidation := GenerateErrorMessage(err)
 		return errValidation, nil
 	}
 
@@ -117,7 +117,7 @@ func ValidateParamPayload(ctx *fiber.Ctx, vld *validator.Validate, payload inter
 
 	err := vld.Struct(payload)
 	if err != nil {
-		errValidation := generateErrorMessage(err)
+		errValidation := GenerateErrorMessage(err)
 		return errValidation, nil
 	}
 
@@ -132,7 +132,7 @@ func ValidateCookiePayload(ctx *fiber.Ctx, vld *validator.Validate, payload inte
 
 	err := vld.Struct(payload)
 	if err != nil {
-		errValidation := generateErrorMessage(err)
+		errValidation := GenerateErrorMessage(err)
 		return errValidation, nil
 	}
 

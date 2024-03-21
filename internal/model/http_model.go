@@ -2,10 +2,11 @@ package model
 
 // Response is standard api response model.
 type Response struct {
-	Status     int         `json:"status"`
-	Message    string      `json:"message"`
-	Data       any         `json:"data"`
-	Pagination *Pagination `json:"pagination,omitempty"`
+	Status     int            `json:"status"`
+	Message    string         `json:"message"`
+	Data       any            `json:"data"`
+	Pagination *Pagination    `json:"pagination,omitempty"`
+	Errors     map[string]any `json:"errors,omitempty"`
 }
 
 // Pagination is pagination response model.
