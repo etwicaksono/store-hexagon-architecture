@@ -13,11 +13,11 @@ type GetProductsRequest struct {
 }
 
 type UpdateProductRequest struct {
-	Name  string
-	Stock *int
+	Name  string `json:"name"`
+	Stock *int   `json:"stock"`
 }
 
 type CreateProductRequest struct {
-	Name  string `json:"name_product" validate:"required"`
+	Name  string `json:"name" validate:"required"`
 	Stock int    `json:"stock" validate:"required"`
 }

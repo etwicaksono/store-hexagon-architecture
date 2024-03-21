@@ -15,7 +15,7 @@ import (
 	"go.mongodb.org/mongo-driver/mongo/options"
 )
 
-func (mg *Mongo) List(ctx context.Context, req model.GetProductsRequest) (data []*products.ProductEntity, pgn *model.Pagination, statusCode int, err error) {
+func (mg *Mongo) List(ctx context.Context, req model.GetProductListRequest) (data []*products.ProductEntity, pgn *model.Pagination, statusCode int, err error) {
 	startTime := time.Now()
 
 	ctx, span := mg.otel.Tracer().Start(ctx, "db:product:find")
