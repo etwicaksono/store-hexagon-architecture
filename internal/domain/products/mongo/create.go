@@ -5,7 +5,7 @@ import (
 	"fmt"
 	"net/http"
 	"store-hexagon-architecture/internal/domain/products"
-	"store-hexagon-architecture/internal/utils/errorhelper"
+	"store-hexagon-architecture/internal/utils/errorutil"
 	"time"
 
 	"go.mongodb.org/mongo-driver/bson/primitive"
@@ -20,7 +20,7 @@ func (mg *Mongo) Create(ctx context.Context, product products.ProductEntity) (da
 	prd := mg.fromEntity(product)
 	res, err := mg.db.Collection(mg.products).InsertOne(ctx, prd)
 	if err != nil {
-		return nil, http.StatusInternalServerError, errorhelper.ErrInternalDB
+		return nil, http.StatusInternalServerError, errorutil.ErrInternalDB
 	}
 
 	prd.ID = res.InsertedID.(primitive.ObjectID)

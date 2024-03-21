@@ -1,4 +1,4 @@
-package errorhelper
+package errorutil
 
 import "errors"
 

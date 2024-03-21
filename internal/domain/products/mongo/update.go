@@ -6,7 +6,7 @@ import (
 	"net/http"
 	"store-hexagon-architecture/internal/domain/products"
 	"store-hexagon-architecture/internal/model"
-	"store-hexagon-architecture/internal/utils/errorhelper"
+	"store-hexagon-architecture/internal/utils/errorutil"
 	"time"
 
 	"go.mongodb.org/mongo-driver/bson"
@@ -22,7 +22,7 @@ func (mg *Mongo) Update(ctx context.Context, objectID string, updateData model.U
 
 	id, err := primitive.ObjectIDFromHex(objectID)
 	if err != nil {
-		return nil, http.StatusBadRequest, errorhelper.ErrNotFoundProduct
+		return nil, http.StatusBadRequest, errorutil.ErrNotFoundProduct
 	}
 
 	filter := bson.M{
@@ -43,9 +43,9 @@ func (mg *Mongo) Update(ctx context.Context, objectID string, updateData model.U
 	err = mg.db.Collection(mg.products).FindOneAndUpdate(ctx, filter, updateQuery, options.FindOneAndUpdate().SetReturnDocument(options.After)).Decode(&pr)
 	if err != nil {
 		if err == mongo.ErrNoDocuments {
-			return nil, http.StatusNotFound, errorhelper.ErrNotFoundProduct
+			return nil, http.StatusNotFound, errorutil.ErrNotFoundProduct
 		}
-		return nil, http.StatusInternalServerError, errorhelper.ErrInternalDB
+		return nil, http.StatusInternalServerError, errorutil.ErrInternalDB
 	}
 
 	endTime := time.Now()

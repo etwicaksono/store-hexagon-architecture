@@ -6,7 +6,7 @@ import (
 	"net/http"
 	"store-hexagon-architecture/internal/domain/products"
 	"store-hexagon-architecture/internal/model"
-	"store-hexagon-architecture/internal/utils/errorhelper"
+	"store-hexagon-architecture/internal/utils/errorutil"
 	"strings"
 	"time"
 
@@ -36,7 +36,7 @@ func (mg *Mongo) List(ctx context.Context, req model.GetProductsRequest) (data [
 
 	cur, err := mg.db.Collection(mg.products).Find(ctx, filter, options)
 	if err != nil {
-		return nil, nil, http.StatusInternalServerError, errorhelper.ErrInternalDB
+		return nil, nil, http.StatusInternalServerError, errorutil.ErrInternalDB
 	}
 	defer cur.Close(ctx)
 
@@ -45,17 +45,17 @@ func (mg *Mongo) List(ctx context.Context, req model.GetProductsRequest) (data [
 		var product ProductMongo
 		err := cur.Decode(&product)
 		if err != nil {
-			return nil, nil, http.StatusInternalServerError, errorhelper.ErrInternalDB
+			return nil, nil, http.StatusInternalServerError, errorutil.ErrInternalDB
 		}
 		products = append(products, product)
 	}
 	if err := cur.Err(); err != nil {
-		return nil, nil, http.StatusInternalServerError, errorhelper.ErrInternalDB
+		return nil, nil, http.StatusInternalServerError, errorutil.ErrInternalDB
 	}
 
 	total, err := mg.db.Collection(mg.products).CountDocuments(ctx, filter)
 	if err != nil {
-		return nil, nil, http.StatusInternalServerError, errorhelper.ErrInternalDB
+		return nil, nil, http.StatusInternalServerError, errorutil.ErrInternalDB
 	}
 	defer cur.Close(ctx)
 

@@ -5,7 +5,7 @@ import (
 	"fmt"
 	"net/http"
 	"store-hexagon-architecture/internal/domain/products"
-	"store-hexagon-architecture/internal/utils/errorhelper"
+	"store-hexagon-architecture/internal/utils/errorutil"
 	"time"
 
 	"go.mongodb.org/mongo-driver/bson"
@@ -28,7 +28,7 @@ func (mg *Mongo) Find(ctx context.Context, objectID string) (data *products.Prod
 	var pr ProductMongo
 	err = mg.db.Collection(mg.products).FindOne(ctx, filter).Decode(&pr)
 	if err == mongo.ErrNoDocuments {
-		return nil, http.StatusNotFound, errorhelper.ErrNotFoundProduct
+		return nil, http.StatusNotFound, errorutil.ErrNotFoundProduct
 	}
 
 	endTime := time.Now()

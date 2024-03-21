@@ -4,7 +4,7 @@ import (
 	"context"
 	"fmt"
 	"net/http"
-	"store-hexagon-architecture/internal/utils/errorhelper"
+	"store-hexagon-architecture/internal/utils/errorutil"
 	"time"
 
 	"go.mongodb.org/mongo-driver/bson"
@@ -20,7 +20,7 @@ func (mg *Mongo) Delete(ctx context.Context, objectID string) (statusCode int, e
 
 	id, err := primitive.ObjectIDFromHex(objectID)
 	if err != nil {
-		return http.StatusBadRequest, errorhelper.ErrNotFoundProduct
+		return http.StatusBadRequest, errorutil.ErrNotFoundProduct
 	}
 
 	filter := bson.M{"id": id}
@@ -29,13 +29,13 @@ func (mg *Mongo) Delete(ctx context.Context, objectID string) (statusCode int, e
 	result, err := mg.db.Collection(mg.products).DeleteOne(ctx, filter)
 	if err != nil {
 		if err == mongo.ErrNoDocuments {
-			return http.StatusNotFound, errorhelper.ErrNotFoundProduct
+			return http.StatusNotFound, errorutil.ErrNotFoundProduct
 		}
-		return http.StatusInternalServerError, errorhelper.ErrInternalDB
+		return http.StatusInternalServerError, errorutil.ErrInternalDB
 	}
 
 	if result.DeletedCount == 0 {
-		return http.StatusNotFound, errorhelper.ErrNotFoundProduct
+		return http.StatusNotFound, errorutil.ErrNotFoundProduct
 	}
 
 	endTime := time.Now()
