@@ -13,7 +13,7 @@ import (
 	"go.mongodb.org/mongo-driver/mongo"
 )
 
-func (mg *Mongo) Find(ctx context.Context, objectID string) (data *products.Product, statusCode int, err error) {
+func (mg *Mongo) Find(ctx context.Context, objectID string) (data *products.ProductEntity, statusCode int, err error) {
 	startTime := time.Now()
 
 	ctx, span := mg.otel.Tracer().Start(ctx, "db:product:find")
@@ -25,7 +25,7 @@ func (mg *Mongo) Find(ctx context.Context, objectID string) (data *products.Prod
 		"deleted_at": bson.M{"$exists": false},
 	}
 
-	var pr Product
+	var pr ProductMongo
 	err = mg.db.Collection(mg.products).FindOne(ctx, filter).Decode(&pr)
 	if err == mongo.ErrNoDocuments {
 		return nil, http.StatusNotFound, errorhelper.ErrNotFoundProduct

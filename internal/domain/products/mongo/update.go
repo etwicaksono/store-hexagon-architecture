@@ -15,7 +15,7 @@ import (
 	"go.mongodb.org/mongo-driver/mongo/options"
 )
 
-func (mg *Mongo) Update(ctx context.Context, objectID string, updateData model.UpdateProductRequest) (data *products.Product, statusCode int, err error) {
+func (mg *Mongo) Update(ctx context.Context, objectID string, updateData model.UpdateProductRequest) (data *products.ProductEntity, statusCode int, err error) {
 	startTime := time.Now()
 	ctx, span := mg.otel.Tracer().Start(ctx, "db:product:update")
 	defer span.End()
@@ -39,7 +39,7 @@ func (mg *Mongo) Update(ctx context.Context, objectID string, updateData model.U
 
 	updateQuery := bson.M{"$set": update}
 
-	var pr Product
+	var pr ProductMongo
 	err = mg.db.Collection(mg.products).FindOneAndUpdate(ctx, filter, updateQuery, options.FindOneAndUpdate().SetReturnDocument(options.After)).Decode(&pr)
 	if err != nil {
 		if err == mongo.ErrNoDocuments {

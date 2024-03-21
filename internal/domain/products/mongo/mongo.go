@@ -17,8 +17,8 @@ type Mongo struct {
 	log      *logger.Logger
 }
 
-// New to create new products db.
-func New(
+// RepoProvider to create new products db.
+func RepoProvider(
 	db *mongo.Database,
 	products string,
 	otel *infrastructure.Otel,
@@ -31,30 +31,30 @@ func New(
 	}
 }
 
-func (mg *Mongo) fromEntity(p products.Product) Product {
-	return Product{
+func (mg *Mongo) fromEntity(p products.ProductEntity) ProductMongo {
+	return ProductMongo{
 		Name:  p.Name,
 		Stock: p.Stock,
 	}
 }
 
 // Product is model database for product
-type Product struct {
+type ProductMongo struct {
 	ID    primitive.ObjectID `bson:"id,omitempty"`
 	Name  string             `bson:"name"`
 	Stock int                `bson:"stock"`
 }
 
-func (p *Product) toEntity() *products.Product {
-	return &products.Product{
+func (p *ProductMongo) toEntity() *products.ProductEntity {
+	return &products.ProductEntity{
 		ID:    p.ID.Hex(),
 		Name:  p.Name,
 		Stock: p.Stock,
 	}
 }
 
-func toEntities(p []Product) []*products.Product {
-	productSlice := make([]*products.Product, len(p))
+func toEntities(p []ProductMongo) []*products.ProductEntity {
+	productSlice := make([]*products.ProductEntity, len(p))
 	for i, product := range p {
 		productSlice[i] = product.toEntity()
 	}

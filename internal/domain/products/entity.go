@@ -1,6 +1,6 @@
 package products
 
-type Product struct {
+type ProductEntity struct {
 	ID    string
 	Name  string
 	Stock int

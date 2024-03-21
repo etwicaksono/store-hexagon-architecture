@@ -15,7 +15,7 @@ import (
 	"go.mongodb.org/mongo-driver/mongo/options"
 )
 
-func (mg *Mongo) List(ctx context.Context, req model.GetProductRequest) (data []*products.Product, pgn *model.Pagination, statusCode int, err error) {
+func (mg *Mongo) List(ctx context.Context, req model.GetProductsRequest) (data []*products.ProductEntity, pgn *model.Pagination, statusCode int, err error) {
 	startTime := time.Now()
 
 	ctx, span := mg.otel.Tracer().Start(ctx, "db:product:find")
@@ -40,9 +40,9 @@ func (mg *Mongo) List(ctx context.Context, req model.GetProductRequest) (data []
 	}
 	defer cur.Close(ctx)
 
-	var products []Product
+	var products []ProductMongo
 	for cur.Next(ctx) {
-		var product Product
+		var product ProductMongo
 		err := cur.Decode(&product)
 		if err != nil {
 			return nil, nil, http.StatusInternalServerError, errorhelper.ErrInternalDB

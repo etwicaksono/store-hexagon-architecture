@@ -4,48 +4,42 @@
 # Default: development
 environment: development
 app:
-  name: Store-Hexagon-Architecture
-  version: 1.0.0
-  host: localhost
-  port: 3000
-  env: development
-  url: http://localhost:3000
-  logLevel: trace
+   name: Store-Hexagon-Architecture
+   version: 1.0.0
+   host: localhost
+   port: 3000
+   url: http://localhost:3000
+   logLevel: trace
 fiber:
-  # The maximum amount of time (second) to wait for the next request when keep-alive is enabled. If IdleTimeout is zero, the value of ReadTimeout is used.
-  #
-  #Default: unlimited
-  idleTimeout: 30
+   # The maximum amount of time (second) to wait for the next request when keep-alive is enabled. If IdleTimeout is zero, the value of ReadTimeout is used.
+   #
+   #Default: 5
+   idleTimeout: 5
 
-  # The maximum duration (second) before timing out writes of the response. It is reset after the request handler has returned.
-  #
-  # Default: unlimited
-  writeTimeout: 30
+   # The maximum duration (second) before timing out writes of the response. It is reset after the request handler has returned.
+   #
+   # Default: 5
+   writeTimeout: 5
 
-  # The amount of time allowed to read the full request including body. It is reset after the request handler has returned. The connection's read deadline is reset when the connection opens.
-  #
-  # Default: unlimited
-  readTimeout: 30
+   # The amount of time allowed to read the full request including body. It is reset after the request handler has returned. The connection's read deadline is reset when the connection opens.
+   #
+   # Default: 5
+   readTimeout: 5
 
-  # When set to true, this will spawn multiple Go processes listening on the same port.
-  #
-  # Default: false
-  prefork: false
+   # When set to true, this will spawn multiple Go processes listening on the same port.
+   #
+   # Default: false
+   prefork: false
 
-  # When set to true, it will prevent app to panic
-  #
-  #Default: false
-  recovery: true
-
-  # EnableStackTrace enables handling stack trace
-  #
-  # Optional. Default: false
-  enableStackTrace: true
+   # EnableStackTrace enables handling stack trace
+   #
+   # Optional. Default: false
+   enableStackTrace: true
 otel:
-  grpcHost: 18.141.146.167:4317
+   grpcHost: 18.141.146.167:4317
 db:
-  address: localhost:27017
-  name: db_store
-  maxConnectionOpen: 10
-  maxConnectionIdle: 10
-  maxConnectionLifetime: 60s
+   address: localhost:27017
+   name: db_store
+   maxConnectionOpen: 10
+   maxConnectionIdle: 10
+   maxConnectionLifetime: 60s

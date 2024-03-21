@@ -11,7 +11,7 @@ import (
 	"go.mongodb.org/mongo-driver/bson/primitive"
 )
 
-func (mg *Mongo) Create(ctx context.Context, product products.Product) (data *products.Product, statusCode int, err error) {
+func (mg *Mongo) Create(ctx context.Context, product products.ProductEntity) (data *products.ProductEntity, statusCode int, err error) {
 	startTime := time.Now()
 
 	ctx, span := mg.otel.Tracer().Start(ctx, "db:product:create")
