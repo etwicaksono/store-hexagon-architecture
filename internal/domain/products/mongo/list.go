@@ -18,7 +18,7 @@ import (
 func (mg *Mongo) List(ctx context.Context, req model.GetProductListRequest) (data []*products.ProductEntity, pgn *model.Pagination, statusCode int, err error) {
 	startTime := time.Now()
 
-	ctx, span := mg.otel.Tracer().Start(ctx, "db:product:find")
+	ctx, span := mg.otel.Tracer().Start(ctx, "db:product:list")
 	defer span.End()
 
 	filter := make(map[string]interface{})
@@ -62,7 +62,7 @@ func (mg *Mongo) List(ctx context.Context, req model.GetProductListRequest) (dat
 	endTime := time.Now()
 	executionTime := endTime.Sub(startTime)
 
-	mg.log.Info(fmt.Sprintf("Execution Time (db:product:find): %s\n", executionTime))
+	mg.log.Info(fmt.Sprintf("Execution Time (db:product:list): %s\n", executionTime))
 
 	return toEntities(products), &model.Pagination{
 		Total:       int(total),

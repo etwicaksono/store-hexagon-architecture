@@ -36,7 +36,7 @@ fiber:
    # Optional. Default: false
    enableStackTrace: true
 otel:
-   grpcHost: 18.141.146.167:4317
+   grpcHost: localhost:4317
 db:
    address: localhost:27017
    name: db_store
